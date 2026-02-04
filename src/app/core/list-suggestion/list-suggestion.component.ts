@@ -44,4 +44,27 @@ status: 'en_attente',
 nbLikes:0
 },
 ];
+searchTitle = '';
+
+get filteredSuggestions() {
+  const t = this.searchTitle.trim().toLowerCase();
+  return this.suggestions.filter(s =>
+    !t || s.title.toLowerCase().includes(t)
+  );
+}
+
+like(s: any) {
+  s.nbLikes++;
+}
+
+favorites: Suggestion[] = [];
+
+addToFavorites(s: Suggestion) {
+  const exists = this.favorites.some(f => f.id === s.id);
+  if (!exists) {
+    this.favorites.push(s);
+  }
+}
+
+
 }
